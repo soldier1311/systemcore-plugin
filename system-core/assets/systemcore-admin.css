@@ -1,0 +1,237 @@
+.systemcore-wrap {
+    max-width: 1200px;
+}
+
+.systemcore-title {
+    margin-bottom: 20px;
+}
+
+.systemcore-grid {
+    display: grid;
+    grid-gap: 20px;
+}
+
+.systemcore-grid-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.systemcore-grid-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+
+.systemcore-grid-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 960px) {
+    .systemcore-grid-4,
+    .systemcore-grid-2 {
+        grid-template-columns: 1fr;
+    }
+}
+
+.systemcore-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 16px 18px;
+    box-shadow: 0 1px 3px rgba(15, 17, 17, 0.15);
+    margin-bottom: 20px; /* ← spacing ثابت لكل الكروت */
+}
+
+.systemcore-card-title {
+    margin-top: 0;
+}
+
+.sc-card-warning {
+    border-left: 4px solid #d63638;
+}
+
+.sc-card-success {
+    border-left: 4px solid #46b450;
+}
+
+.sc-card-label {
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 6px;
+}
+
+.sc-card-value {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.systemcore-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.systemcore-table th,
+.systemcore-table td {
+    border-bottom: 1px solid #e2e4e7;
+    padding: 8px 10px;
+    text-align: left;
+}
+
+.systemcore-table th {
+    background: #f6f7f7;
+    font-weight: 600;
+}
+
+.systemcore-table-compact th,
+.systemcore-table-compact td {
+    padding: 6px 8px;
+}
+
+.systemcore-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sc-mt-15 {
+    margin-top: 15px;
+}
+
+.sc-mt-30 {
+    margin-top: 30px;
+}
+
+.systemcore-actions .button {
+    margin-right: 8px;
+    margin-bottom: 8px;
+}
+
+.systemcore-pagination {
+    padding: 12px 0 0;
+    display: flex;
+    justify-content: flex-end;
+    gap: 6px;
+}
+
+.systemcore-pagination button {
+    min-width: 30px;
+}
+
+.systemcore-list {
+    list-style: disc;
+    margin-left: 20px;
+}
+
+.sc-notice-area {
+    margin-top: 10px;
+}
+
+.sc-notice-area .notice {
+    margin: 10px 0 0;
+}
+
+
+/* ============================================================
+   AI SETTINGS — FIXED SPACING BETWEEN CARDS (المشكلة الأساسية)
+   ============================================================ */
+
+
+
+/* ============================================================
+   AI Settings Tabs / Layout
+   ============================================================ */
+
+.systemcore-ai-form {
+    margin-top: 20px;
+}
+
+.systemcore-tabs {
+    margin-top: 20px;
+}
+
+.systemcore-tab-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    border-bottom: 1px solid #e2e4e7;
+    margin-bottom: 15px;
+}
+
+.sc-tab-button {
+    border: 1px solid #d0d4da;
+    background: #f3f4f6;
+    padding: 6px 14px;
+    border-radius: 4px 4px 0 0;
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 1.4;
+    margin-bottom: -1px;
+}
+
+.sc-tab-button.active {
+    background: #ffffff;
+    border-bottom-color: #ffffff;
+}
+
+.systemcore-tab-panels {
+    border: 1px solid #e2e4e7;
+    border-radius: 0 4px 4px 4px;
+    background: #ffffff;
+    padding: 15px;
+}
+
+.sc-tab-panel {
+    display: none;
+}
+
+.sc-tab-panel.active {
+    display: block;
+}
+
+.sc-input-wide {
+    width: 100%;
+    max-width: 420px;
+}
+
+.systemcore-card .sc-card-sub {
+    margin-top: 4px;
+    font-size: 12px;
+    color: #7a7f87;
+}
+
+/* ============================================================
+   AI SETTINGS — ACCORDION STYLE (REPLACES TABS)
+   ============================================================ */
+
+.sc-accordion {
+    margin-top: 20px;
+}
+
+.sc-acc-item {
+    border: 1px solid #e2e4e7;
+    border-radius: 8px;
+    background: #fff;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+.sc-acc-header {
+    padding: 14px 18px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    background: #f6f7f7;
+    border-bottom: 1px solid #e2e4e7;
+}
+
+.sc-acc-header:hover {
+    background: #ececec;
+}
+
+.sc-acc-content {
+    display: none;
+    padding: 20px;
+    background: white;
+}
+
+.sc-acc-item.open .sc-acc-content {
+    display: block;
+}
+
