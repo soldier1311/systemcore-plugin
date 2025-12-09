@@ -1,0 +1,602 @@
+/* =======================================
+   SYSTEMCORE UI FRAMEWORK v1 — PRO
+   Tokens + Layout + Components + Notion Tables
+======================================= */
+
+/* ==============
+   CSS TOKENS
+================= */
+:root {
+    --sc-radius: 10px;
+    --sc-radius-sm: 6px;
+
+    --sc-bg: #f8fafc;
+    --sc-card-bg: #ffffff;
+
+    --sc-border: #e2e8f0;
+    --sc-border-dark: #cbd5e1;
+
+    --sc-text: #1e293b;
+    --sc-text-light: #64748b;
+
+    --sc-primary: #2563eb;
+    --sc-primary-hover: #1d4ed8;
+
+    --sc-danger: #dc2626;
+    --sc-danger-hover: #b91c1c;
+
+    --sc-success: #16a34a;
+    --sc-warning: #d97706;
+
+    --sc-shadow: 0 4px 14px rgba(0,0,0,0.07);
+    --sc-shadow-card: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+/* =======================================
+   RESET
+======================================= */
+.sc-page,
+.sc-page * {
+    box-sizing: border-box;
+}
+
+/* =======================================
+   PAGE WRAPPER + TYPOGRAPHY
+======================================= */
+.sc-page {
+    padding: 32px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--sc-bg);
+    color: var(--sc-text);
+}
+
+.sc-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: var(--sc-text);
+}
+
+/* KPI Title + Value */
+.sc-kpi-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--sc-text-light);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.sc-kpi-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--sc-text);
+}
+
+.sc-orange {
+    color: #f97316;
+}
+
+.sc-green {
+    color: #16a34a;
+}
+
+/* Spacing Helpers */
+.sc-mt-10 { margin-top: 10px; }
+.sc-mt-20 { margin-top: 20px; }
+.sc-mt-30 { margin-top: 30px; }
+
+/* =======================================
+   CARD
+======================================= */
+.sc-card {
+    background: var(--sc-card-bg);
+    border-radius: var(--sc-radius);
+    padding: 22px;
+    border: 1px solid var(--sc-border);
+    box-shadow: var(--sc-shadow-card);
+    transition: box-shadow 0.15s ease, transform 0.1s ease;
+    margin: 10px 0;
+}
+
+.sc-card:hover {
+    box-shadow: var(--sc-shadow);
+    transform: translateY(-1px);
+}
+
+.sc-card-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 14px;
+    color: var(--sc-text);
+}
+
+/* =======================================
+   GRID SYSTEM
+======================================= */
+.sc-grid {
+    display: grid;
+    gap: 20px;
+}
+
+.sc-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.sc-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.sc-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 900px) {
+    .sc-grid-3,
+    .sc-grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .sc-grid-2,
+    .sc-grid-3,
+    .sc-grid-4 {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =======================================
+   BADGES
+======================================= */
+.sc-badge {
+    display: inline-block;
+    padding: 3px 7px;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: var(--sc-radius-sm);
+    border: 1px solid transparent;
+}
+
+.sc-badge-dark {
+    background: #111827;
+    color: #fff;
+}
+
+.sc-badge-success {
+    background: var(--sc-success);
+    color: #fff;
+}
+
+.sc-badge-danger {
+    background: var(--sc-danger);
+    color: #fff;
+}
+
+.sc-badge-warning {
+    background: var(--sc-warning);
+    color: #fff;
+}
+
+/* Priority badges (feeds) */
+.sc-badge-prio-main {
+    background: #1e3a8a;
+    color: #fff;
+}
+
+.sc-badge-prio-high {
+    background: #0369a1;
+    color: #fff;
+}
+
+.sc-badge-prio-medium {
+    background: #0f766e;
+    color: #fff;
+}
+
+.sc-badge-prio-low {
+    background: #92400e;
+    color: #fff;
+}
+
+.sc-badge-prio-verylow {
+    background: #4b5563;
+    color: #fff;
+}
+
+/* Type + status inside feeds */
+.sc-badge-type {
+    background: #111827;
+    color: #e5e7eb;
+}
+
+.sc-badge-main-flag {
+    background: #15803d;
+    color: #fff;
+}
+
+.sc-badge-active {
+    background: #16a34a;
+    color: #fff;
+}
+
+.sc-badge-inactive {
+    background: #b91c1c;
+    color: #fff;
+}
+
+/* =======================================
+   BUTTONS
+======================================= */
+.sc-btn {
+    padding: 6px 16px;
+    border-radius: var(--sc-radius-sm);
+    cursor: pointer;
+    border: none;
+    font-weight: 600;
+    font-size: 13px;
+    transition: background 0.15s ease, opacity 0.15s ease, border-color 0.15s ease;
+}
+
+.sc-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.sc-btn-primary {
+    background: var(--sc-primary);
+    color: #fff;
+}
+
+.sc-btn-primary:hover {
+    background: var(--sc-primary-hover);
+}
+
+.sc-btn-danger {
+    background: var(--sc-danger);
+    color: #fff;
+}
+
+.sc-btn-danger:hover {
+    background: var(--sc-danger-hover);
+}
+
+.sc-btn-outline {
+    background: #fff;
+    border: 1px solid var(--sc-border-dark);
+    color: var(--sc-text);
+}
+
+.sc-btn-outline:hover {
+    border-color: var(--sc-text-light);
+}
+
+/* Very small buttons (table actions) */
+.sc-btn-xxs {
+    padding: 2px 8px;
+    font-size: 11px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1px solid #d1d5db;
+    background: #fff;
+    transition: 0.15s;
+}
+
+.sc-btn-xxs:hover {
+    background: #f3f4f6;
+}
+
+/* =======================================
+   HEADER BAR (TOP OF PAGE)
+======================================= */
+.sc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.sc-header-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.sc-header-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.sc-header-desc {
+    font-size: 13px;
+    color: #6b7280;
+    margin-top: 2px;
+}
+
+.sc-header-right {
+    display: flex;
+    gap: 10px;
+}
+
+/* =======================================
+   MODAL
+======================================= */
+.sc-modal {
+    display: none;
+    position: fixed;
+    z-index: 99999;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(4px);
+}
+
+.sc-modal-content {
+    background: #fff;
+    padding: 24px;
+    width: 520px;
+    max-width: 95%;
+    margin: 80px auto;
+    border-radius: var(--sc-radius);
+    box-shadow: var(--sc-shadow);
+    animation: sc-fadein 0.25s ease;
+}
+
+@keyframes sc-fadein {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* =======================================
+   FORMS
+======================================= */
+.sc-field {
+    margin-bottom: 17px;
+}
+
+.sc-field label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.sc-field input,
+.sc-field select,
+.sc-field textarea {
+    width: 100%;
+    padding: 9px 10px;
+    border: 1px solid var(--sc-border);
+    border-radius: var(--sc-radius-sm);
+    font-size: 14px;
+    background: #fff;
+}
+
+.sc-field input:focus,
+.sc-field select:focus,
+.sc-field textarea:focus {
+    border-color: var(--sc-primary);
+    box-shadow: 0 0 0 2px rgba(37,99,235,0.15);
+    outline: none;
+}
+
+/* Field inline */
+.sc-field-inline {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+/* Help text */
+.sc-help-text {
+    display: block;
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--sc-text-light);
+}
+
+/* Modal footer */
+.sc-modal-footer {
+    margin-top: 18px;
+    display: flex;
+    gap: 8px;
+}
+
+/* =======================================
+   TABLES – NOTION STYLE (STANDARD)
+======================================= */
+
+.sc-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+/* الأساس: كل .sc-table تكون Notion-style */
+.sc-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 13px;
+}
+
+/* alias لاستخدام خاص */
+.sc-table-notion {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 13px;
+}
+
+/* الرأس */
+.sc-table thead th,
+.sc-table-notion thead th {
+    background: #f9fafb;
+    padding: 10px 12px;
+    font-weight: 600;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+    color: #111827;
+    white-space: nowrap;
+}
+
+/* الخلايا */
+.sc-table tbody td,
+.sc-table-notion tbody td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #f3f4f6;
+    color: #374151;
+}
+
+.sc-table tbody tr:last-child td,
+.sc-table-notion tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Hover */
+.sc-table tbody tr:hover td,
+.sc-table-notion tbody tr:hover td {
+    background: #f8fafc;
+}
+
+/* Compact mode */
+.sc-table-compact.sc-table td,
+.sc-table-compact.sc-table th,
+.sc-table-compact.sc-table-notion td,
+.sc-table-compact.sc-table-notion th {
+    padding: 7px 10px;
+}
+
+/* Overview small table */
+.sc-overview-table.sc-table td,
+.sc-overview-table.sc-table th,
+.sc-overview-table.sc-table-notion td,
+.sc-overview-table.sc-table-notion th {
+    padding: 8px 12px;
+}
+
+/* Status badges inside tables */
+.sc-table-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.sc-table-badge-green { background: #16a34a; }
+.sc-table-badge-red   { background: #dc2626; }
+.sc-table-badge-blue  { background: #2563eb; }
+.sc-table-badge-gray  { background: #6b7280; }
+.sc-table-badge-yellow{ background: #d97706; }
+
+/* Row status helpers */
+.sc-row-error td    { background: #fff1f2; }
+.sc-row-warning td  { background: #fffbeb; }
+.sc-row-success td  { background: #ecfdf5; }
+.sc-row-pending td  { background: #f3f4f6; }
+
+/* Hover highlight override */
+.sc-row-hover td {
+    background: #f8fafc !important;
+}
+
+/* Table actions column */
+.sc-table .sc-actions,
+.sc-table-notion .sc-actions {
+    display: flex;
+    gap: 6px;
+}
+
+/* =======================================
+   FEED SOURCES – CARD LIST LAYOUT
+======================================= */
+
+.sc-feed-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sc-feed-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 6px;
+}
+
+.sc-feed-name {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.sc-feed-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.sc-feed-logo-wrap {
+    flex-shrink: 0;
+}
+
+.sc-feed-logo {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+}
+
+.sc-feed-url {
+    font-size: 11px;
+    word-break: break-all;
+    margin-bottom: 8px;
+}
+
+.sc-feed-actions {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+.sc-status-bar {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    margin: 15px 0 20px 0;
+}
+
+.sc-status-item {
+    flex: 1;
+    padding: 8px 10px;
+    border-radius: 6px;
+    text-align: center;
+    color: #fff;
+    font-size: 13px;
+    line-height: 16px;
+    min-height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.sc-status-title {
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.sc-green  { background: #28a745; }
+.sc-yellow { background: #f0ad4e; }
+.sc-red    { background: #dc3545; }
+
