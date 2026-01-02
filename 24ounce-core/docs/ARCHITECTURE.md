@@ -1,73 +1,27 @@
-# 24Ounce Core – Architecture Reference
+## Service Registry
 
-هذا الملف هو المرجع الوحيد المعتمد لفهم وبناء وتعديل إضافة 24ounce-core.
-أي كود جديد يجب أن يلتزم بما ورد هنا حرفيًا.
+The 24ounce-core implements a lightweight and explicit Service Registry
+to manage internal dependencies in a controlled and predictable way.
 
----
+### Goals
 
-## 1. الهيكل العام
+- Avoid global state and hidden dependencies
+- Prevent silent service overrides
+- Ensure consistent lifecycle management
+- Improve testability and maintainability
 
-24ounce-core.php
-├─ admin/
-│  ├─ menu.php                (تعريف قوائم لوحة التحكم)
-│  ├─ page-prices.php         (واجهة إدارة الأسعار فقط – بدون منطق)
-│  ├─ save-handler.php        (استقبال وحفظ البيانات من admin)
-│  ├─ ajax-trading.php        (Ajax خاص بحالة التداول)
-│
-├─ includes/
-│  ├─ database.php            (جميع عمليات SQL – المصدر الوحيد)
-│  ├─ registry.php            (ثوابت – جداول – مسارات – Hooks)
-│
-│  ├─ price-engine.php        (منطق الحساب الأساسي للأسعار)
-│  ├─ price-service.php       (تنسيق الأعمال – يستدعي engine + database)
-│  ├─ price-admin-service.php (منطق خاص بالإدارة فقط)
-│  ├─ price-ajax.php          (Ajax للأسعار – لا حسابات مباشرة)
-│  ├─ price-shortcode.php     (عرض فقط)
-│
-│  ├─ chart-engine.php        (منطق بيانات الرسوم)
-│  ├─ chart-ajax.php          (Ajax للرسوم)
-│
-│  ├─ wallet-engine.php       (محفظة المستخدم)
-│  ├─ vault-ledger-engine.php (سجل الحركات)
-│  ├─ order-engine.php        (أوامر البيع والشراء)
-│
-├─ assets/
-│  ├─ js/                     (JavaScript فقط)
-│  └─ css/                    (CSS فقط)
-│
-├─ templates/
-│  └─ gold-chart.php          (قوالب عرض فقط)
+### Design Principles
 
----
+- Services must be explicitly registered during the bootstrap phase
+- Services are lazy-loaded and treated as singletons by default
+- Resolving an unregistered service is considered a fatal configuration error
+- The registry is not a general-purpose service locator
 
-## 2. القواعد الذهبية (ممنوع كسرها)
+### Registration
 
-1. لا يوجد SQL خارج database.php
-2. لا يوجد حساب أو منطق داخل admin
-3. Ajax لا يحسب – فقط يستدعي Service
-4. Engine لا يعرف شيئًا عن Admin أو Ajax
-5. أسماء الدوال والكلاسات تؤخذ من registry.php فقط
-6. أي ملف جديد = تحديث ARCHITECTURE.md أولًا
+Services are registered using factories:
 
----
-
-## 3. تدفق البيانات الرسمي
-
-Admin / Ajax / Shortcode
-        ↓
-   Service Layer
-        ↓
-     Engine
-        ↓
-     Database
-
----
-
-## 4. سبب وجود هذا الملف
-
-- منع تكرار المنطق
-- منع نسيان المسارات
-- منع اختراع دوال جديدة
-- جعل ChatGPT أو أي مطور يعمل بدون تخمين
-
-هذا الملف ملزم.
+```php
+TwentyFourOunce_Registry::register('price_engine', function () {
+    return new TwentyFourOunce_Price_Engine();
+});
