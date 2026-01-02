@@ -1,31 +1,86 @@
 <?php
-if (!defined('ABSPATH')) exit;
+/**
+ * 24Ounce Core - Service Registry
+ */
 
-class TwentyFourOunce_Registry {
+if (!defined('ABSPATH')) {
+    exit;
+}
 
-    /* ========= Tables ========= */
-    public static function tables() {
-        global $wpdb;
-        return [
-            'prices'        => $wpdb->prefix . '24ounce_prices',
-            'trading_state' => $wpdb->prefix . '24ounce_trading_state',
-            'ledger'        => $wpdb->prefix . '24ounce_ledger',
-        ];
+final class TwentyFourOunce_Registry
+{
+    /**
+     * Registered service factories
+     *
+     * @var array<string, callable>
+     */
+    private static array $factories = [];
+
+    /**
+     * Resolved service instances (singletons)
+     *
+     * @var array<string, object>
+     */
+    private static array $instances = [];
+
+    /**
+     * Register a service factory.
+     *
+     * @throws RuntimeException
+     */
+    public static function register(string $key, callable $factory): void
+    {
+        if (isset(self::$factories[$key])) {
+            throw new RuntimeException(
+                "Service '{$key}' is already registered."
+            );
+        }
+
+        self::$factories[$key] = $factory;
     }
 
-    /* ========= Paths ========= */
-    public static function paths() {
-        return [
-            'includes' => plugin_dir_path(__FILE__),
-            'assets'   => plugin_dir_url(dirname(__FILE__)) . 'assets/',
-        ];
+    /**
+     * Resolve a service (lazy-loaded singleton).
+     *
+     * @throws RuntimeException
+     */
+    public static function get(string $key): object
+    {
+        if (!isset(self::$factories[$key])) {
+            throw new RuntimeException(
+                "Service '{$key}' is not registered."
+            );
+        }
+
+        if (!isset(self::$instances[$key])) {
+            $instance = call_user_func(self::$factories[$key]);
+
+            if (!is_object($instance)) {
+                throw new RuntimeException(
+                    "Factory for service '{$key}' must return an object."
+                );
+            }
+
+            self::$instances[$key] = $instance;
+        }
+
+        return self::$instances[$key];
     }
 
-    /* ========= Services ========= */
-    public static function services() {
-        return [
-            'price_service' => 'TwentyFourOunce_Price_Service',
-            'price_engine'  => 'TwentyFourOunce_Price_Engine',
-        ];
+    /**
+     * Check if a service is registered.
+     */
+    public static function has(string $key): bool
+    {
+        return isset(self::$factories[$key]);
+    }
+
+    /**
+     * Reset registry state (intended for testing only).
+     */
+    public static function reset(): void
+    {
+        self::$factories = [];
+        self::$instances = [];
     }
 }
